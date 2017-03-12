@@ -10,11 +10,11 @@ default: &default
   port: 5432
   timeout: 5000
   username:
-  host: localhost
 
 development:
   <<: *default
   database: fmk_dev
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,6 +22,7 @@ development:
 test:
   <<: *default
   database: fmk_test
+  host: localhost
 
 production:
   <<: *default
