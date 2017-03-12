@@ -1,0 +1,12 @@
+<% @characters_with_stats.each do |char| %>
+  <h3><%= char[:name] %></h3>
+
+  <ul>
+    <% char[:stats].each do |val| %>
+      <li>
+        <%= val[:name] %>
+        <%= val[:votes].count %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
