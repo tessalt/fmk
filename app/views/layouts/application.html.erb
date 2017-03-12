@@ -8,7 +8,22 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <nav class="clearfix">
+      <div class="left">
+        <%= link_to root_path, class: 'flex' do %>
+          <%= image_tag 'logo.jpg' %>
+          <span class="inline-block p2">Fuck, Marry, Kill</span>
+        <% end %>
+      </div>
+    <div class="right">
+      <%= link_to 'Play', root_path, class: 'p2 inline-block' %>
+      <%= link_to 'Results', results_path, class: 'p2 inline-block' %>
+    </div>
+  </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

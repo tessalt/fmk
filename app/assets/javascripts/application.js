@@ -26,6 +26,12 @@
   votes.forEach(function (vote) {
     vote.addEventListener('click', function (event) {
       event.preventDefault();
+      votes.forEach(function (v) {
+        if (v.dataset.type === vote.dataset.type) {
+          v.classList.remove('selected');
+        }
+      });
+      vote.classList.add('selected');
       var index = vote.dataset.index;
       var input = document.getElementById('votes_' + index + '_value');
       input.value = vote.dataset.type;

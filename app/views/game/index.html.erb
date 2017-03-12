@@ -1,17 +1,24 @@
+
 <%= form_tag votes_path, id: 'fmk' do |f| %>
-  <div class="characters">
+<div class="max-width-4 mx-auto mt2">
+  <div class="characters clearfix">
     <% @characters.each_with_index do |character, index| %>
-      <div class="character">
+      <div class="character col col-4 mx-auto px2">
+        <%= image_tag(character.photo, width: '400', class: 'fit') %>
         <p><%= character.name %></p>
-        <%= image_tag(character.photo, width: '250') %>
         <%= fields_for "votes[#{index}]" do |v| %>
-          <% Vote.values.keys.to_a.each do |type| %>
-            <button type="button" class="vote" data-type="<%= type %>" data-index="<%= index %>"><%= type %></button>
-          <% end %>
-          <%= v.text_field :value, class: 'value'  %>
+          <div class="flex">
+            <% Vote.values.keys.to_a.each do |type| %>
+              <span class="inline-block mx1">
+                <button class="vote btn btn-primary mr1 inline-block" data-type="<%= type %>" data-index="<%= index %>"><%= type %></button>
+              </span>
+            <% end %>
+          </div>
+          <%= v.hidden_field :value, class: 'value'  %>
           <%= v.hidden_field :character_id, :value => character.id %>
         <% end %>
-      </div>
+        </div>
     <% end %>
   </div>
+</div>
 <% end %>

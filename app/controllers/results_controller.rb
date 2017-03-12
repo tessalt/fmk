@@ -24,7 +24,7 @@ class ResultsController < ApplicationController
       values = Vote.values.keys.to_a.map do |val|
         {
           name: val,
-          votes: votes.select {|vote| vote.value == val}
+          votes: votes ? votes.select {|vote| vote.value == val} : []
         }
       end
       {
