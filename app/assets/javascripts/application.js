@@ -43,11 +43,15 @@
         }
       });
 
-      if (allValues().filter(Boolean).length === 3) {
-        form.submit();
-      }
 
     });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (allValues().filter(Boolean).length === 3) {
+      form.submit();
+    }
   });
 
   function allValues() {

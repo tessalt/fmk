@@ -27,3 +27,8 @@ body {
   background-color: #ddd;
   color: #0074d9;
 }
+
+.btn.next {
+  display: inline-block;
+  background-color: red;
+}

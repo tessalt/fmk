@@ -10,7 +10,7 @@
           <div class="flex">
             <% Vote.values.keys.to_a.each do |type| %>
               <span class="inline-block mx1">
-                <button class="vote btn btn-primary mr1 inline-block" data-type="<%= type %>" data-index="<%= index %>"><%= type %></button>
+                <button class="vote btn btn-primary bg-blue mr1 inline-block" data-type="<%= type %>" data-index="<%= index %>"><%= type %></button>
               </span>
             <% end %>
           </div>
@@ -20,5 +20,9 @@
         </div>
     <% end %>
   </div>
+
+</div>
+<div class="max-width-4 mx-auto mt2 center">
+  <button class="next btn btn-primary block" type="submit">Next</button>
 </div>
 <% end %>
