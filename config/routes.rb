@@ -4,5 +4,10 @@ Rails.application.routes.draw do
 
   get "/results", to: "results#index"
 
+  namespace :api do
+    get 'characters', to: 'characters#index'
+    post 'votes', to: 'votes#create'
+  end
+
   resources :votes
 end
