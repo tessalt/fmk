@@ -29,7 +29,7 @@ module Api
         character_votes = votes.select {|v| v[:character_id] == char[:id]}
         results = Vote.values.keys.to_a.map do |val|
           {
-            name: val,
+            value: val,
             count: character_votes ? character_votes.select {|vote| vote.value == val}.length : 0
           }
         end
