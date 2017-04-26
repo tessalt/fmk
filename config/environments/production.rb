@@ -86,7 +86,9 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://st-fmk.s3-website.us-east-2.amazonaws.com'
+      origins 'http://st-fmk.s3-website.us-east-2.amazonaws.com',
+        'http://star-trek-fmk.club.s3-website.ca-central-1.amazonaws.com',
+        'http://star-trek-fmk.club'
       resource '*', :headers => :any, :methods => [:get, :post, :options]
     end
   end
