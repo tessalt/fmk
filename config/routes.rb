@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     get 'characters', to: 'characters#index'
     post 'votes', to: 'votes#create'
+    get 'stats', to: 'stats#index'
   end
 
   resources :votes
