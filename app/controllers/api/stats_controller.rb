@@ -8,43 +8,21 @@ module Api
     private
 
     def characters
-      chars = Character.all
-      votes = Vote.all
-      chars.map do |char|
-        character_votes = votes.select {|v| v[:character_id] == char[:id]}
-        results = Vote.values.keys.to_a.map do |val|
-          {
-            value: val,
-            count: character_votes ? character_votes.select {|vote| vote.value == val}.length : 0
-          }
-        end
-        char.as_json.merge({votes: results})
-      end
-    end
+      sql = "select c.name, c.photo, count(v.id), v.value, v.character_id from votes v join characters c on v.character_id=c.id group by v.value, v.character_id, c.name, c.photo"
+      records_array = ActiveRecord::Base.connection.execute(sql)
 
-    def votes_by_character
-      @votes_by_character ||= @votes.inject({}) do |memo, vote|
-        if memo[vote.character_id]
-          memo[vote.character_id].push(vote)
-        else
-          memo[vote.character_id] = [vote]
-        end
-        memo
-      end
-    end
+      characters = records_array.group_by {|r| r["character_id"]}
 
-    def characters_with_stats
-      @characters.map do |character|
-        votes = votes_by_character[character.id]
-        values = Vote.values.keys.to_a.map do |val|
-          {
-            name: val,
-            votes: votes ? votes.select {|vote| vote.value == val} : []
-          }
-        end
+      characters.map do |character, rows|
         {
-          name: character.name,
-          stats: values
+          name: rows[0]["name"],
+          photo: rows[0]["photo"],
+          votes: rows.map do |row|
+            {
+              value: Vote.values.key(row["value"]),
+              count: row["count"]
+            }
+          end
         }
       end
     end
